@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew // Aerospace Engineering Log</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght=700;800;900&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f0eeea;
+            background-image: repeating-linear-gradient(#ccc 0 1px, transparent 1px 28px),
+                              repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 28px);
+            background-size: 28px 28px;
+            font-family: 'Nunito', sans-serif;
+            color: #111;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #fff;
+            border: 2.5px solid #111;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 5px 5px 0px #111;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .btn-action {
+            background: #FFD93D;
+            border: 2.5px solid #111;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 900;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 3px 3px 0px #111;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        .btn-action:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #111;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 32px 0 16px;
+            display: inline-block;
+            background: #4ECDC4;
+            padding: 2px 10px;
+            border: 2.5px solid #111;
+            border-radius: 8px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 2.5px solid #111;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 5px 5px 0px #111;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .pill {
+            font-size: 9px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 2px solid #111;
+        }
+        .p-work { background: #111; color: #fff; }
+        .p-content { background: #FF6B6B; color: #fff; }
+        .p-date { font-size: 11px; font-weight: 800; color: #888; }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .media-box {
+            background: #f7f7f2;
+            border: 2px solid #111;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: #888;
+            min-height: 40px;
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        /* Modal Layout System */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; padding: 20px;
+        }
+        .modal-card {
+            background: white; border: 3px solid #111; border-radius: 14px;
+            width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto;
+            padding: 24px; box-shadow: 8px 8px 0px #111; position: relative;
+        }
+        .close-x {
+            position: absolute; top: 15px; right: 15px; font-size: 20px;
+            cursor: pointer; font-weight: 900;
+        }
+
+        .form-group { margin-bottom: 12px; text-align: left;}
+        label { display: block; font-weight: 800; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
+        input, textarea, select {
+            width: 100%; padding: 8px; border: 2px solid #111; border-radius: 6px;
+            font-family: inherit; font-size: 13px; box-sizing: border-box;
+        }
+        
+        .preview-pane {
+            margin-top: 20px; border: 2.5px dashed #111; padding: 14px;
+            border-radius: 10px; background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div>
+                <div class="logo-text">Matthew_Aero.log</div>
+                <div style="font-size: 13px; font-weight: 800; color: #666; margin-top: 4px;">Autonomous Rocket & Hypersonic Avionics Development</div>
+            </div>
+            <button class="btn-action" onclick="openAdminModal()">Admin Panel</button>
+        </header>
+
+        <h2>📱 Engineering Project Feed</h2>
+        <div id="liveFeed" class="project-grid"></div>
+    </div>
+
+    <div id="adminModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <span class="close-x" onclick="closeAdminModal()">❌</span>
+            
+            <div id="authPanel" style="text-align: center; padding: 20px 0;">
+                <h3 style="font-weight: 900; margin-bottom: 14px; text-transform: uppercase;">Security Authorization</h3>
+                <div class="form-group" style="max-width: 200px; margin: 0 auto 14px;">
+                    <input type="password" id="pinField" placeholder="Enter PIN" style="text-align: center; font-size: 18px; letter-spacing: 4px;">
+                </div>
+                <button class="btn-action" onclick="verifyAccessCode()">Unlock Panel</button>
+            </div>
+
+            <div id="dashboardPanel" style="display: none;">
+                <h3 style="font-weight: 900; text-transform: uppercase; border-bottom: 2.5px dashed #111; padding-bottom: 8px; margin-bottom: 16px;">Log Entry Terminal</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label>Entry Title</label>
+                        <input type="text" id="entryTitle" placeholder="e.g., Grid Fin CFD Sweep" oninput="updateLivePreview()">
+                    </div>
+                    <div class="form-group">
+                        <label>Date / Phase</label>
+                        <input type="text" id="entryDate" placeholder="e.g., June 28, 2026" oninput="updateLivePreview()">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label>Classification</label>
+                        <select id="entryType" onchange="updateLivePreview()">
+                            <option value="System Engineering">System Engineering</option>
+                            <option value="YouTube Short">YouTube Short</option>
+                            <option value="CAD Synthesis">CAD Synthesis</option>
+                            <option value="Simulations">Simulations</option>
+                            <option value="Avionics Math">Avionics Math</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Color Theme Tag</label>
+                        <select id="entryColor" onchange="updateLivePreview()">
+                            <option value="p-work">Black (System Engineering/Work)</option>
+                            <option value="p-content">Red (Content/Social Update)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description Log</label>
+                    <textarea id="entryDesc" rows="3" placeholder="Document specific system variables cunched..." oninput="updateLivePreview()"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>YouTube Embed Code (Optional)</label>
+                    <textarea id="entryMedia" rows="2" placeholder='<iframe src="https://www.youtube.com/embed/XXXXXX" ...></iframe>' oninput="updateLivePreview()"></textarea>
+                </div>
+
+                <button class="btn-action" style="background: #4ECDC4; width: 100%; margin-top: 10px;" onclick="commitEntryLog()">➕ Add Entry to Live Feed (Pushed to Top)</button>
+
+                <div class="preview-pane">
+                    <h5 style="font-size: 10px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; color: #666;">✨ Live Card Preview Window</h5>
+                    <div id="previewContainer"></div>
+                </div>
+
+                <div style="margin-top: 24px; border-top: 2.5px dashed #111; padding-top: 16px; text-align: center;">
+                    <button class="btn-action" style="background: #FF6B6B; color: white; width: 100%; font-size: 14px; padding: 12px;" onclick="compileGlobalDeploymentCode()">⚡ Copy Entire Site Code (Ready for GitHub)</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // PRE-LOADED DATA PIPELINE DIRECTLY FROM HANDWRITTEN JOURNAL CHECKS
+        // Newest inputs will always unshift to index position [0] (the very top)
+        const compiledStaticDatabase = /* SYSTEM_DATA_INJECTION */ [
+  {
+    "title": "TVC Design 2 & Schematic Design 2",
+    "date": "June 26, 2026",
+    "type": "System Engineering",
+    "colorClass": "p-work",
+    "desc": "Executed layout revisions for Thrust Vector Control hardware configurations alongside complete Schematic Design 4 optimizations.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Media Slot Pending ]</div>"
+  },
+  {
+    "title": "TVC Calculations & Design 1",
+    "date": "June 24 - 25, 2026",
+    "type": "Avionics Math",
+    "colorClass": "p-work",
+    "desc": "Completed intensive physics calculations detailing structural flight forces on the TVC mount system. Pivoted directly into raw structural modeling designs.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Computations Complete ]</div>"
+  },
+  {
+    "title": "Flight Computer Schematic Layouts",
+    "date": "June 17 - 18, 2026",
+    "type": "CAD Synthesis",
+    "colorClass": "p-work",
+    "desc": "Drafted initial PCB hardware traces mapping out core MCU pinouts, converting high-level system routing constraints directly into working electronic design schematics.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Hardware Layout Mapped ]</div>"
+  },
+  {
+    "title": "TVC Design Systems, Recovery Testing & Core Sims",
+    "date": "June 10 - 13, 2026",
+    "type": "Simulations",
+    "colorClass": "p-work",
+    "desc": "Dense block processing: Completed TVC component integration runs, executed primary recovery loop load drops, and iterated back-to-back rocket flight body simulator sweeps (Sims 2 & 3).",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Simulation Log Clean ]</div>"
+  },
+  {
+    "title": "Rocket Sims (Fins & Recovery) & Mathematical Calculations",
+    "date": "June 8 - 9, 2026",
+    "type": "Avionics Math",
+    "colorClass": "p-work",
+    "desc": "Initiated trajectory prediction algorithms. Evaluated mechanical loading and aerodynamics performance for fin variants and tracking configurations across distinct velocity brackets.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Math Verification Done ]</div>"
+  },
+  {
+    "title": "Fin Design Optimization & Avionics Integration",
+    "date": "June 3 - 5, 2026",
+    "type": "CAD Synthesis",
+    "colorClass": "p-work",
+    "desc": "Modeled custom landing gear bracket configurations, wire channels, and structural alignment interfaces. Completed phase 2 assembly steps for the secondary test vehicle airframe structure.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Assembly Verified ]</div>"
+  },
+  {
+    "title": "Rocket Body Infrastructure: Main Design Phase 1",
+    "date": "June 1 - 2, 2026",
+    "type": "System Engineering",
+    "colorClass": "p-work",
+    "desc": "Kicked off structural definition layouts for the primary launcher fuselage core. Finalized foundational mechanical bounds and length parameters for sub-assembly modules.",
+    "media": "<div style=\"padding:14px; font-size:11px; color:#ccc;\">[ Base CAD Locked ]</div>"
+  }
+] /* END_INJECTION */;
+
+        let flightLogEntries = JSON.parse(localStorage.getItem('aero_log_registry')) || compiledStaticDatabase;
+        
+        if (localStorage.getItem('aero_log_registry') === null && compiledStaticDatabase.length > 0) {
+            localStorage.setItem('aero_log_registry', JSON.stringify(compiledStaticDatabase));
+        }
+
+        let userHasAuthorizedAccess = false;
+
+        function renderCoreTelemetryFeed() {
+            const feedContainer = document.getElementById('liveFeed');
+            if(!feedContainer) return;
+            
+            if (flightLogEntries.length === 0) {
+                feedContainer.innerHTML = `<div class="card" style="text-align:center; color:#888; padding: 40px;">No entries logged yet. Click Admin Panel to start writing your project log!</div>`;
+                return;
+            }
+
+            let generatedFeedHTML = '';
+            flightLogEntries.forEach((item) => {
+                generatedFeedHTML += generateCardHTMLMarkup(item);
+            });
+            feedContainer.innerHTML = generatedFeedHTML;
+        }
+
+        function generateCardHTMLMarkup(dataObj) {
+            return `
+            <div class="card">
+                <div class="card-meta">
+                    <span class="pill ${dataObj.colorClass}">${dataObj.type}</span>
+                    <span class="p-date">${dataObj.date}</span>
+                </div>
+                <div class="card-title">${dataObj.title}</div>
+                <div class="card-desc">${dataObj.desc}</div>
+                <div class="media-box">${dataObj.media}</div>
+            </div>`;
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'flex';
+            if (userHasAuthorizedAccess) {
+                showDashboardPanel();
+            } else {
+                document.getElementById('authPanel').style.display = 'block';
+                document.getElementById('dashboardPanel').style.display = 'none';
+                document.getElementById('pinField').focus();
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function verifyAccessCode() {
+            const parsedPinValue = document.getElementById('pinField').value;
+            if (parsedPinValue === "8532") {
+                userHasAuthorizedAccess = true;
+                showDashboardPanel();
+            } else {
+                alert("Incorrect PIN.");
+                document.getElementById('pinField').value = '';
+            }
+        }
+
+        function showDashboardPanel() {
+            document.getElementById('authPanel').style.display = 'none';
+            document.getElementById('dashboardPanel').style.display = 'block';
+            updateLivePreview();
+        }
+
+        function updateLivePreview() {
+            const targetPreviewPane = document.getElementById('previewContainer');
+            
+            const mockDataInstance = {
+                title: document.getElementById('entryTitle').value || "Project Title Preview",
+                date: document.getElementById('entryDate').value || "Date Preview",
+                type: document.getElementById('entryType').value,
+                colorClass: document.getElementById('entryColor').value,
+                desc: document.getElementById('entryDesc').value || "Your entry description text will format live right here as you type...",
+                media: document.getElementById('entryMedia').value || '<div style="padding:15px; font-size:11px; color:#888;">[ Media Embed Box Preview ]</div>'
+            };
+
+            targetPreviewPane.innerHTML = generateCardHTMLMarkup(mockDataInstance);
+        }
+
+        function commitEntryLog() {
+            const title = document.getElementById('entryTitle').value;
+            const date = document.getElementById('entryDate').value;
+            const type = document.getElementById('entryType').value;
+            const colorClass = document.getElementById('entryColor').value;
+            const desc = document.getElementById('entryDesc').value;
+            let media = document.getElementById('entryMedia').value;
+
+            if (!title || !date || !desc) {
+                alert("Please fill out the Title, Date, and Description fields.");
+                return;
+            }
+            if (!media) { media = '<div style="padding:14px; font-size:11px; color:#ccc;">[ No Media Attached ]</div>'; }
+
+            // CRUCIAL PART: .unshift() pushes the fresh entry straight to index 0 (top of the feed)
+            flightLogEntries.unshift({ title, date, type, colorClass, desc, media });
+            localStorage.setItem('aero_log_registry', JSON.stringify(flightLogEntries));
+            
+            renderCoreTelemetryFeed();
+            updateLivePreview();
+            
+            document.getElementById('entryTitle').value = '';
+            document.getElementById('entryDate').value = '';
+            document.getElementById('entryDesc').value = '';
+            document.getElementById('entryMedia').value = '';
+            
+            alert("Entry successfully injected directly to the top of your layout! Ready to compile code.");
+        }
+
+        function compileGlobalDeploymentCode() {
+            const outerHTMLString = document.documentElement.outerHTML;
+            const scanningRegexExpression = /\/\* SYSTEM_DATA_INJECTION \*\/([\s\S]*?)\/\* END_INJECTION \*\//;
+            const formattedPayloadString = `/* SYSTEM_DATA_INJECTION */ ${JSON.stringify(flightLogEntries, null, 2)} /* END_INJECTION */`;
+            
+            let compiledDistributionSourceCode = outerHTMLString.replace(scanningRegexExpression, formattedPayloadString);
+            compiledDistributionSourceCode = compiledDistributionSourceCode.replace('id="adminModal" class="modal-overlay" style="display: flex;"', 'id="adminModal" class="modal-overlay" style="display: none;"');
+            
+            navigator.clipboard.writeText("<!DOCTYPE html>\n" + compiledDistributionSourceCode).then(() => {
+                alert("🚀 Master Site Code Copied to Clipboard!\n\nNow go to your GitHub repository file editor, select everything, paste this updated code over it, and save changes.");
+            }).catch(err => {
+                alert("Copy failed. Code has been printed to the developer console log instead.");
+                console.log("<!DOCTYPE html>\n" + compiledDistributionSourceCode);
+            });
+        }
+
+        renderCoreTelemetryFeed();
+    </script>
+</body>
+</html>
