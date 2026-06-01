@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><plasmo-csui id="g0-textarea-recorder"></plasmo-csui><plasmo-csui id="g0-widget"></plasmo-csui><plasmo-csui id="g0-ratings-popup"></plasmo-csui><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matthew // Aerospace Engineering Log</title>
@@ -181,20 +180,30 @@
         <header>
             <div>
                 <div class="logo-text">Matthew_Aero.log</div>
-                <div style="font-size: 13px; font-weight: 800; color: #666; margin-top: 4px;">Autonomous Rocket & Hypersonic Avionics Development</div>
+                <div style="font-size: 13px; font-weight: 800; color: #666; margin-top: 4px;">Autonomous Rocket &amp; Hypersonic Avionics Development</div>
             </div>
             <button class="btn-action" onclick="openAdminModal()">Admin Panel</button>
         </header>
 
         <h2>📱 Engineering Project Feed</h2>
-        <div id="liveFeed" class="project-grid"></div>
+        <div id="liveFeed" class="project-grid">
+            <div class="card">
+                <div class="card-meta">
+                    <span class="pill p-content">YouTube Short</span>
+                    <span class="p-date">June 1, 2026</span>
+                </div>
+                <div class="card-title">Project Log 001</div>
+                <div class="card-desc">Welcome to my Project log. This is were you can see daily iterations; the sensor calibration issues, the hardware testing, the fried components, and the data anomalies. If it fails on the pad, we'll analyze the telemetry together.
+</div>
+                <div class="media-box">https://www.youtube.com/shorts/AW5EBvgxa2w</div>
+            </div></div>
     </div>
 
     <div id="adminModal" class="modal-overlay" style="display: none;">
         <div class="modal-card">
             <span class="close-x" onclick="closeAdminModal()">❌</span>
             
-            <div id="authPanel" style="text-align: center; padding: 20px 0;">
+            <div id="authPanel" style="text-align: center; padding: 20px 0px; display: none;">
                 <h3 style="font-weight: 900; margin-bottom: 14px; text-transform: uppercase;">Security Authorization</h3>
                 <div class="form-group" style="max-width: 200px; margin: 0 auto 14px;">
                     <input type="password" id="pinField" placeholder="Enter PIN" style="text-align: center; font-size: 18px; letter-spacing: 4px;">
@@ -202,7 +211,7 @@
                 <button class="btn-action" onclick="verifyAccessCode()">Unlock Panel</button>
             </div>
 
-            <div id="dashboardPanel" style="display: none;">
+            <div id="dashboardPanel" style="display: block;">
                 <h3 style="font-weight: 900; text-transform: uppercase; border-bottom: 2.5px dashed #111; padding-bottom: 8px; margin-bottom: 16px;">Log Entry Terminal</h3>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
@@ -243,14 +252,24 @@
 
                 <div class="form-group">
                     <label>YouTube Embed Code (Optional)</label>
-                    <textarea id="entryMedia" rows="2" placeholder='<iframe src="https://www.youtube.com/embed/XXXXXX" ...></iframe>' oninput="updateLivePreview()"></textarea>
+                    <textarea id="entryMedia" rows="2" placeholder="&lt;iframe src=&quot;https://www.youtube.com/embed/XXXXXX&quot; ...&gt;&lt;/iframe&gt;" oninput="updateLivePreview()"></textarea>
                 </div>
 
                 <button class="btn-action" style="background: #4ECDC4; width: 100%; margin-top: 10px;" onclick="commitEntryLog()">➕ Add Entry to Live Feed (Pushed to Top)</button>
 
                 <div class="preview-pane">
                     <h5 style="font-size: 10px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; color: #666;">✨ Live Card Preview Window</h5>
-                    <div id="previewContainer"></div>
+                    <div id="previewContainer">
+            <div class="card">
+                <div class="card-meta">
+                    <span class="pill p-content">YouTube Short</span>
+                    <span class="p-date">June 1, 2026</span>
+                </div>
+                <div class="card-title">Project Log 001</div>
+                <div class="card-desc">Welcome to my Project log. This is were you can see daily iterations; the sensor calibration issues, the hardware testing, the fried components, and the data anomalies. If it fails on the pad, we'll analyze the telemetry together.
+</div>
+                <div class="media-box">https://www.youtube.com/shorts/AW5EBvgxa2w</div>
+            </div></div>
                 </div>
 
                 <div style="margin-top: 24px; border-top: 2.5px dashed #111; padding-top: 16px; text-align: center;">
@@ -263,7 +282,16 @@
 
     <script>
         // CLEAN STRUCTURAL STORAGE CONTAINER ARRAY
-        const compiledStaticDatabase = /* SYSTEM_DATA_INJECTION */ [] /* END_INJECTION */;
+        const compiledStaticDatabase = /* SYSTEM_DATA_INJECTION */ [
+  {
+    "title": "Project Log 001",
+    "date": "June 1, 2026",
+    "type": "YouTube Short",
+    "colorClass": "p-content",
+    "desc": "Welcome to my Project log. This is were you can see daily iterations; the sensor calibration issues, the hardware testing, the fried components, and the data anomalies. If it fails on the pad, we'll analyze the telemetry together.\n",
+    "media": "https://www.youtube.com/shorts/AW5EBvgxa2w"
+  }
+] /* END_INJECTION */;
 
         let flightLogEntries = JSON.parse(localStorage.getItem('aero_log_registry')) || compiledStaticDatabase;
         
@@ -395,5 +423,6 @@
 
         renderCoreTelemetryFeed();
     </script>
-</body>
-</html>
+
+
+</body></html>
