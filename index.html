@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><plasmo-csui id="g0-textarea-recorder"></plasmo-csui><plasmo-csui id="g0-widget"></plasmo-csui><plasmo-csui id="g0-ratings-popup"></plasmo-csui><head>
+<html lang="en"><plasmo-csui id="g0-textarea-recorder"></plasmo-csui><plasmo-csui id="g0-widget"></plasmo-csui><plasmo-csui id="g0-ratings-popup"></plasmo-csui><head></head><body><plasmo-csui id="g0-textarea-recorder"></plasmo-csui><plasmo-csui id="g0-widget"></plasmo-csui><plasmo-csui id="g0-ratings-popup"></plasmo-csui>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matthew // Aerospace Engineering Log</title>
@@ -173,8 +173,8 @@
             border-radius: 10px; background: #fafafa;
         }
     </style>
-</head>
-<body>
+
+
 
     <div class="container">
         <header>
@@ -187,6 +187,15 @@
 
         <h2>📱 Engineering Project Feed</h2>
         <div id="liveFeed" class="project-grid">
+            <div class="card">
+                <div class="card-meta">
+                    <span class="pill p-content">YouTube Short</span>
+                    <span class="p-date">June 2, 2026</span>
+                </div>
+                <div class="card-title">Project Log 002</div>
+                <div class="card-desc">Day 2! Today is all about defining the physical constraints of the vehicle, I started by sketching out the full stack layout for both Stage 1 and Stage 2. I'm creating this as a standard tandem staging configuration. So, I jumped into CAD to model the Stage 2 airframe. Tomorrow, I'll tackle the staging mechanism between stage one and stage 2. See you then.</div>
+                <div class="media-box">https://www.youtube.com/shorts/T5euJp3yBZE</div>
+            </div>
             <div class="card">
                 <div class="card-meta">
                     <span class="pill p-content">YouTube Short</span>
@@ -263,12 +272,11 @@
             <div class="card">
                 <div class="card-meta">
                     <span class="pill p-content">YouTube Short</span>
-                    <span class="p-date">June 1, 2026</span>
+                    <span class="p-date">June 2, 2026</span>
                 </div>
-                <div class="card-title">Project Log 001</div>
-                <div class="card-desc">Welcome to my Project log. This is were you can see daily iterations; the sensor calibration issues, the hardware testing, the fried components, and the data anomalies. If it fails on the pad, we'll analyze the telemetry together.
-</div>
-                <div class="media-box">https://www.youtube.com/shorts/AW5EBvgxa2w</div>
+                <div class="card-title">Project Log 002</div>
+                <div class="card-desc">Day 2! Today is all about defining the physical constraints of the vehicle, I started by sketching out the full stack layout for both Stage 1 and Stage 2. I'm creating this as a standard tandem staging configuration. So, I jumped into CAD to model the Stage 2 airframe. Tomorrow, I'll tackle the staging mechanism between stage one and stage 2. See you then.</div>
+                <div class="media-box">https://www.youtube.com/shorts/T5euJp3yBZE</div>
             </div></div>
                 </div>
 
@@ -283,6 +291,14 @@
     <script>
         // CLEAN STRUCTURAL STORAGE CONTAINER ARRAY
         const compiledStaticDatabase = /* SYSTEM_DATA_INJECTION */ [
+  {
+    "title": "Project Log 002",
+    "date": "June 2, 2026",
+    "type": "YouTube Short",
+    "colorClass": "p-content",
+    "desc": "Day 2! Today is all about defining the physical constraints of the vehicle, I started by sketching out the full stack layout for both Stage 1 and Stage 2. I'm creating this as a standard tandem staging configuration. So, I jumped into CAD to model the Stage 2 airframe. Tomorrow, I'll tackle the staging mechanism between stage one and stage 2. See you then.",
+    "media": "https://www.youtube.com/shorts/T5euJp3yBZE"
+  },
   {
     "title": "Project Log 001",
     "date": "June 1, 2026",
@@ -423,6 +439,7 @@
 
         renderCoreTelemetryFeed();
     </script>
+
 
 
 </body></html>
